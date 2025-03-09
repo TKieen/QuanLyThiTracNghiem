@@ -91,6 +91,10 @@ public class BUS_Test implements DAOInterface<DTO_Test> {
         return daoTest.getAllData();
     }
 
+    public ArrayList<DTO_Test> getAllData(String testCode) {
+        return daoTest.getAllData(testCode);
+    }
+
     @Override
     public DTO_Test selectById(String t) {
         return daoTest.selectById(t);

@@ -164,6 +164,36 @@ public int insert(DTO_Test t) {
         return list;
     }
     
+    public ArrayList<DTO_Test> getAllData(String testCode) {
+        ArrayList<DTO_Test> list = new ArrayList<>();
+        try {
+            Connection con = JDBCUtil.getConnectDB();
+            String sql = "SELECT * FROM test WHERE testCode = ? AND testStatus = 1";
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, testCode);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int testID = rs.getInt("testID");
+                String testCode1 = rs.getString("testCode");
+                String testTitle = rs.getString("testTitle");
+                int tpID = rs.getInt("tpID");
+                int testTime = rs.getInt("testTime");
+                int numEasy = rs.getInt("num_easy");
+                int numMedium = rs.getInt("num_medium");
+                int numDiff = rs.getInt("num_diff");
+                int testLimit = rs.getInt("testLimit");
+                java.sql.Timestamp testDate = rs.getTimestamp("testDate");
+                int testStatus = rs.getInt("testStatus");
+                DTO_Test test = new DTO_Test(testID, testCode1, testTitle, tpID, testTime, numEasy, numMedium, numDiff, testLimit, testDate.toLocalDateTime(), testStatus);
+                list.add(test);
+            }
+            
+            JDBCUtil.close(con);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
     // tìm theo tiêu đề + mã bài
     public ArrayList<DTO_Test> searchData(String searchText) {
