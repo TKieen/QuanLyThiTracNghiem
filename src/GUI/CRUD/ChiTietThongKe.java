@@ -1,4 +1,3 @@
-
 package GUI.CRUD;
 
 import BUS.BUS_Exam;
@@ -21,7 +20,7 @@ public class ChiTietThongKe extends javax.swing.JPanel {
     private BUS_Exam examBUS = new BUS_Exam();
     private BUS_Result resBUS = new BUS_Result();
     private DTO_Test baiThi;
-    
+     
     private ArrayList<DTO_Result> listRes = new ArrayList<>();
     private DefaultTableModel modelTK;
     public ChiTietThongKe(GUI.GUI_MainFrm main, MenuTaskBar menuTask, String testCode) {
@@ -216,6 +215,28 @@ public class ChiTietThongKe extends javax.swing.JPanel {
         this.lblBaiThi.setText(this.baiThi.getTestTitle());
         this.lblSoLuotLamBai.setText(String.valueOf(count));
         
+
+        ArrayList<String> uniqueExamCodes = new ArrayList<>();
+        for (DTO_Result cur : listRes) {
+            if (!uniqueExamCodes.contains(cur.getExCode())) {
+                uniqueExamCodes.add(cur.getExCode());
+            }
+        }
+        int uniqueParticipants = uniqueExamCodes.size();
+        this.lblSoNguoiThamGia.setText(String.valueOf(uniqueParticipants));
+        
+     
+        int passingCount = 0;
+        int failingCount = 0;
+        for (DTO_Result cur : listRes) {
+            if (cur.getRsMask() >= 5.0) {
+                passingCount++;
+            } else {
+                failingCount++;
+            }
+        }
+        this.lblSoLuongDat.setText(String.valueOf(passingCount));
+        this.lblSoLuongChuaDat.setText(String.valueOf(failingCount));
         
         // load bảng
         modelTK = (DefaultTableModel) tblListThi.getModel();
