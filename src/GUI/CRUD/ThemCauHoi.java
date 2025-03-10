@@ -690,14 +690,12 @@ public class ThemCauHoi extends javax.swing.JDialog {
         }// GEN-LAST:event_jButton4ActionPerformed
 
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-                // Validate answer count
                 if (listAnswer.size() < 2 || listAnswer.size() > 6) {
                         JOptionPane.showMessageDialog(this, "Số lượng câu trả lời phải từ 2 đến 6",
                                         "Lỗi", JOptionPane.WARNING_MESSAGE);
                         return;
                 }
 
-                // Validate that a correct answer is selected
                 boolean hasCorrectAnswer = false;
                 for (DTO_Answer answer : listAnswer) {
                         if (answer.isRight() == 1) {
@@ -711,8 +709,6 @@ public class ThemCauHoi extends javax.swing.JDialog {
                                         "Lỗi", JOptionPane.WARNING_MESSAGE);
                         return;
                 }
-
-                // Continue with original functionality
                 DTO_Questions question = new DTO_Questions();
                 question.setqContent(jTextField1.getText().toString());
                 question.setqPictures(imgQuestion);
@@ -723,7 +719,6 @@ public class ThemCauHoi extends javax.swing.JDialog {
                 if (questionBUS.insert(question) > 0) {
                         JOptionPane.showMessageDialog(this, "Thêm câu hỏi thành công");
                         int largestID = questionBUS.getLargestID();
-                        // add answers
                         for (int i = 0; i < listAnswer.size(); i++) {
                                 DTO_Answer answer = listAnswer.get(i);
                                 answer.setQuestionId(largestID);
