@@ -12,6 +12,8 @@ import GUI.Component.MenuTaskBar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import javax.swing.JPanel;
 import GUI.Component.pnlBaiThi;
 import java.awt.BorderLayout;
@@ -46,7 +48,13 @@ public class QuanLyThongKe extends JPanel {
     }
     
     private void LoadUIBaiThi(ArrayList<DTO_Test> list){
-        for(DTO_Test item : list){
+        ArrayList<DTO_Test> listTest = new ArrayList<>();
+        HashSet<String> check = new HashSet<>();
+        for (DTO_Test t : list)
+            if (check.add(t.getTestCode()))
+                listTest.add(t);
+
+        for(DTO_Test item : listTest){
             int count = resBUS.CountResult(item.getTestCode());
             pnlBaiThi pnl = new pnlBaiThi(item.getTestCode(), item.getTestTitle(), count, item.getTestDate().toString());
             pnl.setPreferredSize(new java.awt.Dimension(250, 150));
@@ -66,7 +74,12 @@ public class QuanLyThongKe extends JPanel {
     }
 
     private void LoadBaiThi() {
-        ArrayList<DTO_Test> listTest = testBUS.getAllData();
+        ArrayList<DTO_Test> list = testBUS.getAllData();
+        ArrayList<DTO_Test> listTest = new ArrayList<>();
+        HashSet<String> check = new HashSet<>();
+        for (DTO_Test t : list)
+            if (check.add(t.getTestCode()))
+            listTest.add(t);
         listPnl.clear();
         pnlContent.removeAll();
         LoadUIBaiThi(listTest);
