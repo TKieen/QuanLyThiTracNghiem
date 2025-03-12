@@ -37,6 +37,8 @@ public class ThemChuDe extends JDialog {
         super(parent, modal);
         initComponents();
         loadParentTopics();
+        pack();
+        setLocationRelativeTo(parent);
     }
 
     private void initComponents() {
@@ -136,6 +138,7 @@ public class ThemChuDe extends JDialog {
             jComboBoxParent.addItem("None"); //ID 0
             for (DTO_Topic topic : topics) {
                 jComboBoxParent.addItem(topic.getTpTitle() + " (ID: " + topic.getTpID() + ")");
+
             }
         } else {
             JOptionPane.showMessageDialog(this, "Failed to load parent topics.", "Error", JOptionPane.ERROR_MESSAGE);
