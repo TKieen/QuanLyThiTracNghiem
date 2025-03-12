@@ -7,6 +7,7 @@ import GUI.Menu.QuanLyDeThi;
 import GUI.Menu.QuanLyBaiThi;
 import GUI.Menu.QuanLyTaiKhoan;
 import GUI.Menu.QuanLyChuDe;
+import GUI.Menu.QuanLyChuDe1;
 import GUI.Menu.QuanLyThongKe;
 import GUI.Menu.QuanLyThongTinCaNhan;
 import java.awt.BorderLayout;
@@ -128,7 +129,7 @@ public class MenuTaskBar extends JPanel {
             @Override
             public void mousePressed(MouseEvent evt) {
                 if (isMenuEnabled) { // Kiểm tra trạng thái isMenuEnabled trước khi xử lý sự kiện
-                    QuanLyChuDe qlcd = new QuanLyChuDe();
+                    QuanLyChuDe1 qlcd = new QuanLyChuDe1();
                     main.changePages(qlcd);
                 }
             }
